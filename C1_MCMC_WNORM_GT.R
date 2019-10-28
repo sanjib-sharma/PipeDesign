@@ -1,20 +1,8 @@
-#######################################################################################
-# Bayesian Inference via MCMC
-# Observed Grinsted Data
-# Fit a GEV distribution on data generated from a fully non-stationary GEV distribution
-# Using Wide Normal Prior Distributions on the Parameters
-# (1) Stationary
-# (2) Mu Only Non-stationary
-# (3) Mu Sigma Non-Stationary
-# (4) Fully Non-Stationary
-###########################################################################################
+
 #Initialize Data
 rm(list=ls())
 main_path="/gpfs/group/aim127/default/Sanjib/IDF/ACIS/data/stclg/IDF/StormSurge/"
-#setwd("/Users/su_skl5261/Box Sync/FinalPaper/DataRepository/")
-#load("/gpfs/group/aim127/default/Sanjib/IDF/ACIS/data/stclg/IDF/StormSurge/SourceCode/Grinstedmaxblockdata.RData")
-#datset=newblockmax$surge # Set Dataset
-#tempset=newblockmax$relabase # Set temperature Set
+
 
 infile<-paste('/gpfs/group/aim127/default/Sanjib/IDF/ACIS/data/stclg/IDF/AMS_stclg.txt',sep='')
 big<-scan(infile,skip=0,list(date=0,depth=0))
@@ -121,8 +109,6 @@ burnin=6000 # Burnin
 MULTnsgevplots(run2,rm.burn=TRUE,burn=burnin) #Trace Plots Without Burn-In
 MULTncrej(run2,burn=burnin) #RejectionRate
 cred.table<-CredIntervalsGEV(run2,burn=burnin) # Credible Intervals
-#save(run2,file="Prior2_Grinsted_MuSigma_Output.RData")
-#source("/gpfs/group/aim127/default/Sanjib/IDF/ACIS/data/stclg/IDF/StormSurge/SourceCode/Prior2SourceMuSigma.R")
 
 #load("Prior2_Grinsted_MuSigma_Output.RData")
 burnin=6000 # Burnin
@@ -174,10 +160,4 @@ retint<-benreturn(100,mu_chain,sigma_chain,xi_chain)
 save(mu_chain,xi_chain,sigma_chain,file=paste(main_path,"/GTRESULT/Fully_nonstat_widenorm_param_GT.RData",sep=""))
 save(retint,file=paste(main_path,"/GTRESULT/Fully_nonstat_widenorm_rtnlevel.RData",sep=""))
 
-#save(run2,file="Prior2_Grinsted_FullNS_Output.RData") # Save Data
-#source("/gpfs/group/aim127/default/Sanjib/IDF/ACIS/data/stclg/IDF/StormSurge/SourceCode/Prior2Source.R") # Load Source File
-#burnin=6000 # Burnin
-#load("Prior2_Grinsted_FullNS_Output.RData")
-#cred.table<-CredIntervalsGEV(run2,burn=burnin) # Credible Intervals
-#cred.table
 ###########################################################################################
